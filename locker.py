@@ -5,9 +5,6 @@ import traceback
 import psutil
 
 
-# Used for locking. This could be the name of whatever this scripts/tool is
-
-
 class Lock(object):
     """A class for locking processes with a temp file
 
