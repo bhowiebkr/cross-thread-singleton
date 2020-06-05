@@ -9,5 +9,5 @@ from locker import locker
 
 @locker("my lock string")
 def main():
-    print("\nHello World!")
+    print("Hello World!")
 ```
