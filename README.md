@@ -7,7 +7,7 @@ See the main.py:
 ```python
 from locker import locker
 
-@locker
+@locker("my lock string")
 def main():
-    print("\nHello World!")
+    print("Hello World!")
 ```
