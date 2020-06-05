@@ -4,8 +4,8 @@ A locking mechanism for a python process. Should be cross platform safe.
 
 See the main.py:
 
-'''python
+```python
 @locker
 def main():
     print("\nHello World!")
-'''
+```
