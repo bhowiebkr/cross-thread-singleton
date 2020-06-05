@@ -1,7 +1,7 @@
 from locker import locker
 
 
-@locker
+@locker("test locking")
 def main():
     print("\nHello World!")
 
