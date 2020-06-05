@@ -6,7 +6,6 @@ import psutil
 
 
 # Used for locking. This could be the name of whatever this scripts/tool is
-LOCK_NAME = "test locking"
 
 
 class Lock(object):
@@ -72,28 +71,33 @@ class Lock(object):
             os.remove(self.lock_file)
 
 
-def locker(func):
+def locker(lock_name):
     """Locking  decorator used to wrap the main entry point of the script.
 
     Args:
         func ([type]): The function that gets ran
     """
-    lock = Lock(LOCK_NAME)
 
-    if lock.is_locked():
-        print(f'"{LOCK_NAME}" is already locked. ...Exiting.')
-        exit()
+    def wrapper(func):
 
-    try:
-        print("Not locked, locking now")
-        lock.lock()
-        func()
-    except:
-        traceback.print_exc(limit=1)
-    finally:
-        lock.unlock()
+        lock = Lock(lock_name)
 
-        def dummy():
-            pass
+        if lock.is_locked():
+            print(f'"{lock_name}" is already locked. ...Exiting.')
+            exit()
 
-        return dummy
+        try:
+            print("Not locked, locking now")
+            lock.lock()
+            func()
+        except:
+            traceback.print_exc(limit=1)
+        finally:
+            lock.unlock()
+
+            def dummy():
+                pass
+
+            return dummy
+
+    return wrapper
